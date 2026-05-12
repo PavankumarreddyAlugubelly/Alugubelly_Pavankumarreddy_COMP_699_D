@@ -1,0 +1,43 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+        <h2>Create Your Account</h2>
+        <p class="auth-desc">
+            Register to start managing daily routines, track activity patterns, 
+            and receive meaningful insights about consistency and behavior.
+        </p>
+
+        {% if error %}
+            <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="Enter email address" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create password" required>
+
+            <button type="submit" class="primary-btn">
+                <span class="material-symbols-outlined">person_add</span>
+                Register Account
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already registered?</p>
+            <a href="/auth/login" class="link-btn">
+                Sign In Here
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

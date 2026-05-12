@@ -1,0 +1,84 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="alerts-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>Behavior Alerts</h2>
+        <p>
+            This section highlights noticeable changes in routine patterns. 
+            Alerts are generated only when the system detects unusual activity 
+            based on consistency analysis.
+        </p>
+    </div>
+
+    <!-- ================= ALERT LIST ================= -->
+    {% if alerts %}
+
+    <div class="alerts-list">
+
+        {% for alert in alerts %}
+        <div class="alert-card">
+
+            <!-- ICON BASED ON SEVERITY -->
+            <div class="alert-icon">
+                {% if alert.severity == "HIGH" %}
+                    <span class="material-symbols-outlined high">warning</span>
+                {% elif alert.severity == "MEDIUM" %}
+                    <span class="material-symbols-outlined medium">error</span>
+                {% else %}
+                    <span class="material-symbols-outlined low">info</span>
+                {% endif %}
+            </div>
+
+            <!-- ALERT CONTENT -->
+            <div class="alert-content">
+                <h4>{{ alert.message }}</h4>
+                <p class="alert-meta">
+                    Detected on: {{ alert.createdAt.strftime('%Y-%m-%d %H:%M') }}
+                </p>
+            </div>
+
+            <!-- SEVERITY TAG -->
+            <div class="alert-badge">
+                {{ alert.severity }}
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <!-- ================= NO ALERTS ================= -->
+    <div class="no-data">
+        <span class="material-symbols-outlined">check_circle</span>
+        <p>No unusual behavior detected. Routine is consistent.</p>
+    </div>
+
+    {% endif %}
+
+    <!-- ================= INFO SECTION ================= -->
+    <div class="info-box">
+        <h3>Understanding Alerts</h3>
+        <p>
+            Alerts are generated using pattern analysis based on daily activity inputs. 
+            A high severity alert indicates a strong deviation from expected routine, 
+            while medium and low levels indicate moderate or minor changes.
+        </p>
+    </div>
+
+    <!-- ================= NAVIGATION ================= -->
+    <div class="form-actions">
+        <a href="/parent/dashboard" class="secondary-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

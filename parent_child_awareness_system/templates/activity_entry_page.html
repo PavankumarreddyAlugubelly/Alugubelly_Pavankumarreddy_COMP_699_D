@@ -1,0 +1,80 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="activity-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>Record Daily Activity</h2>
+        <p>
+            Enter today's routine details to help the system analyze consistency 
+            and identify any unusual behavior patterns.
+        </p>
+    </div>
+
+    <!-- ================= FORM ================= -->
+    <div class="activity-card">
+
+        <form method="POST" class="activity-form">
+
+            <!-- STUDY -->
+            <div class="form-group">
+                <label>
+                    <span class="material-symbols-outlined">menu_book</span>
+                    Study Time (hours)
+                </label>
+                <input type="number" name="study" min="0" placeholder="Enter study hours (e.g. 2)" required>
+                <small>Enter number of hours spent studying today.</small>
+            </div>
+
+            <!-- SLEEP -->
+            <div class="form-group">
+                <label>
+                    <span class="material-symbols-outlined">bedtime</span>
+                    Sleep Duration (hours)
+                </label>
+                <input type="number" name="sleep" min="0" placeholder="Enter sleep hours (e.g. 8)" required>
+                <small>Enter total hours of sleep during the night.</small>
+            </div>
+
+            <!-- SCREEN -->
+            <div class="form-group">
+                <label>
+                    <span class="material-symbols-outlined">devices</span>
+                    Screen Time (hours)
+                </label>
+                <input type="number" name="screen" min="0" placeholder="Enter screen time (e.g. 3)" required>
+                <small>Include mobile, TV, and computer usage.</small>
+            </div>
+
+            <!-- SPENDING -->
+            <div class="form-group">
+                <label>
+                    <span class="material-symbols-outlined">payments</span>
+                    Spending Frequency
+                </label>
+                <input type="number" name="spending" min="0" placeholder="Enter number of times spent" required>
+                <small>Enter how many times spending occurred today.</small>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="form-actions">
+                <button type="submit" class="primary-btn">
+                    <span class="material-symbols-outlined">save</span>
+                    Save Activity
+                </button>
+
+                <a href="/parent/dashboard" class="secondary-btn">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Back to Dashboard
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

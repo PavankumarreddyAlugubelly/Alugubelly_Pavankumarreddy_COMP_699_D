@@ -1,0 +1,85 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="child-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>Child Profile Management</h2>
+        <p>
+            Create and manage child profiles. Each profile helps track 
+            routine activities and generate meaningful insights.
+        </p>
+    </div>
+
+    <!-- ================= ADD CHILD ================= -->
+    <div class="form-card">
+
+        <h3>Add New Child</h3>
+
+        <form method="POST" action="/parent/add_child">
+            <input type="text" name="label" placeholder="Child Name" required>
+            <input type="text" name="age" placeholder="Age Range (e.g. 10-12)" required>
+
+            <button type="submit" class="primary-btn">
+                <span class="material-symbols-outlined">person_add</span>
+                Add Profile
+            </button>
+        </form>
+
+    </div>
+
+    <!-- ================= CHILD LIST ================= -->
+    <div class="child-list-section">
+
+        <h3>Existing Profiles</h3>
+
+        {% if children %}
+        <div class="child-grid">
+
+            {% for child in children %}
+            <div class="child-card">
+
+                <h4>{{ child.label }}</h4>
+                <p><strong>Age Range:</strong> {{ child.ageRange }}</p>
+
+                <!-- EDIT -->
+                <form method="POST" action="/parent/edit_child/{{ child.childId }}">
+                    <input type="text" name="label" value="{{ child.label }}" required>
+                    <input type="text" name="age" value="{{ child.ageRange }}" required>
+
+                    <button type="submit" class="secondary-btn">
+                        <span class="material-symbols-outlined">edit</span>
+                        Update
+                    </button>
+                </form>
+
+                <!-- ROUTINE BUTTON -->
+                <a href="/parent/routine/{{ child.childId }}" class="action-btn">
+                    <span class="material-symbols-outlined">settings</span>
+                    Manage Routine
+                </a>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+            <p class="no-data">No child profiles available.</p>
+        {% endif %}
+
+    </div>
+
+    <!-- ================= NAVIGATION ================= -->
+    <div class="form-actions">
+        <a href="/parent/dashboard" class="secondary-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

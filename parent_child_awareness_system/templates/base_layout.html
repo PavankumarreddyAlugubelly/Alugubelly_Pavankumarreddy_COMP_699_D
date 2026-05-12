@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parent–Child Awareness System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="main-header">
+    <div class="logo-section">
+        <h1>AlugubellyTech</h1>
+        <p class="tagline">Smart Daily Awareness Platform for Parents</p>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="/parent/dashboard">
+            <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+
+        <a href="/report/alerts">
+            <span class="material-symbols-outlined">warning</span> Alerts
+        </a>
+
+        <a href="/auth/logout">
+            <span class="material-symbols-outlined">logout</span> Logout
+        </a>
+    </nav>
+</header>
+
+<!-- ================= HERO / WELCOME SECTION ================= -->
+<section class="welcome-section">
+    <div class="welcome-box">
+        <h2>Welcome to Parent–Child Daily Awareness System</h2>
+
+        <p>
+            This platform helps parents understand daily routine patterns of their children 
+            in a responsible and privacy-friendly way. Instead of tracking personal content, 
+            the system focuses only on activity-based insights such as study time, sleep patterns, 
+            screen usage, and spending behavior.
+        </p>
+
+        <p>
+            By identifying routine consistency and unusual changes early, this system supports 
+            better communication and timely guidance between parents and children.
+        </p>
+
+        <div class="feature-highlights">
+            <div class="feature">
+                <span class="material-symbols-outlined">insights</span>
+                <p>Track routine consistency</p>
+            </div>
+
+            <div class="feature">
+                <span class="material-symbols-outlined">monitoring</span>
+                <p>Detect behavior changes</p>
+            </div>
+
+            <div class="feature">
+                <span class="material-symbols-outlined">privacy_tip</span>
+                <p>Privacy-first approach</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PAGE CONTENT ================= -->
+<main class="main-container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="main-footer">
+    <p>© 2026 AlugubellyTech. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

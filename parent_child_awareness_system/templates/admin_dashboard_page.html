@@ -1,0 +1,73 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>System Administration Dashboard</h2>
+        <p>
+            Manage user accounts, monitor system activity, and configure 
+            categories and alert settings from a centralized interface.
+        </p>
+    </div>
+
+    <!-- ================= ACTION CARDS ================= -->
+    <div class="admin-actions">
+
+        <div class="action-card">
+            <span class="material-symbols-outlined">groups</span>
+            <h3>Manage Users</h3>
+            <p>View, activate, or deactivate parent accounts.</p>
+            <a href="/admin/dashboard" class="action-btn">Open User List</a>
+        </div>
+
+        <div class="action-card">
+            <span class="material-symbols-outlined">category</span>
+            <h3>Routine Categories</h3>
+            <p>Create and manage routine categories used in the system.</p>
+            <a href="/admin/categories" class="action-btn">Manage Categories</a>
+        </div>
+
+    </div>
+
+    <!-- ================= USER LIST ================= -->
+    <div class="admin-table-section">
+
+        <h3>Registered Parent Accounts</h3>
+
+        {% if users %}
+        <table class="admin-table">
+
+            <tr>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.profileStatus }}</td>
+                <td>
+                    <a href="/admin/activate/{{ user.parentId }}" class="btn-small success">
+                        Activate
+                    </a>
+                    <a href="/admin/deactivate/{{ user.parentId }}" class="btn-small danger">
+                        Deactivate
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% else %}
+            <p class="no-data">No users found in the system.</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

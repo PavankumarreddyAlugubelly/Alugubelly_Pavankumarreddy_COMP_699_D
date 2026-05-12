@@ -1,0 +1,66 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>Routine Category Management</h2>
+        <p>
+            Define and maintain categories used for organizing routine 
+            activities within the system.
+        </p>
+    </div>
+
+    <!-- ================= ADD CATEGORY ================= -->
+    <div class="form-card">
+
+        <h3>Add New Category</h3>
+
+        <form method="POST">
+            <input type="text" name="label" placeholder="Enter category name" required>
+            <button type="submit" class="primary-btn">
+                <span class="material-symbols-outlined">add</span>
+                Add Category
+            </button>
+        </form>
+
+    </div>
+
+    <!-- ================= CATEGORY LIST ================= -->
+    <div class="admin-table-section">
+
+        <h3>Existing Categories</h3>
+
+        {% if categories %}
+        <table class="admin-table">
+
+            <tr>
+                <th>Category Name</th>
+            </tr>
+
+            {% for cat in categories %}
+            <tr>
+                <td>{{ cat.label }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% else %}
+            <p class="no-data">No categories defined.</p>
+        {% endif %}
+
+    </div>
+
+    <!-- ================= NAVIGATION ================= -->
+    <div class="form-actions">
+        <a href="/admin/dashboard" class="secondary-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Admin Dashboard
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

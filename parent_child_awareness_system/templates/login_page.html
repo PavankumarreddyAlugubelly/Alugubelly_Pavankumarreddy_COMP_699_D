@@ -1,0 +1,43 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+        <h2>Welcome Back</h2>
+        <p class="auth-desc">
+            Sign in to access your dashboard, track daily routines, 
+            and monitor behavior insights in a simple and structured way.
+        </p>
+
+        {% if error %}
+            <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="primary-btn">
+                <span class="material-symbols-outlined">login</span>
+                Sign In
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account?</p>
+            <a href="/auth/register" class="link-btn">
+                Create New Account
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

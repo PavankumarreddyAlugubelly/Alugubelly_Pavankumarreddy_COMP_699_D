@@ -1,0 +1,35 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <div class="page-header">
+        <h2>Manage Parent Accounts</h2>
+        <p>Control access and maintain system user accounts.</p>
+    </div>
+
+    <table class="admin-table">
+
+        <tr>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.profileStatus }}</td>
+            <td>
+                <a href="/admin/activate/{{ user.parentId }}" class="btn-small success">Activate</a>
+                <a href="/admin/deactivate/{{ user.parentId }}" class="btn-small danger">Deactivate</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endblock %}

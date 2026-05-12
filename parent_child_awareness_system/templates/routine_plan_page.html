@@ -1,0 +1,88 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="routine-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>Routine Plan Management</h2>
+        <p>
+            Define and manage daily routine targets such as study time, sleep duration, 
+            screen usage, and spending limits for better consistency tracking.
+        </p>
+    </div>
+
+    <!-- ================= CREATE / UPDATE PLAN ================= -->
+    <div class="form-card">
+
+        <h3>Set Routine Targets</h3>
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Study Target (hours)</label>
+                <input type="number" name="study" min="0" placeholder="e.g. 2" required>
+            </div>
+
+            <div class="form-group">
+                <label>Sleep Target (hours)</label>
+                <input type="number" name="sleep" min="0" placeholder="e.g. 8" required>
+            </div>
+
+            <div class="form-group">
+                <label>Screen Limit (hours)</label>
+                <input type="number" name="screen" min="0" placeholder="e.g. 3" required>
+            </div>
+
+            <div class="form-group">
+                <label>Spending Band</label>
+                <input type="text" name="spending" placeholder="e.g. Low / Medium / High" required>
+            </div>
+
+            <button type="submit" class="primary-btn">
+                <span class="material-symbols-outlined">save</span>
+                Save Routine Plan
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- ================= EXISTING PLAN ================= -->
+    {% if routine %}
+    <div class="routine-card">
+
+        <h3>Current Active Plan</h3>
+
+        <div class="routine-details">
+            <p><strong>Study:</strong> {{ routine.studyTarget }} hrs</p>
+            <p><strong>Sleep:</strong> {{ routine.sleepTarget }} hrs</p>
+            <p><strong>Screen:</strong> {{ routine.screenLimit }} hrs</p>
+            <p><strong>Spending:</strong> {{ routine.spendingBand }}</p>
+        </div>
+
+        <div class="routine-actions">
+            <a href="/parent/archive/{{ routine.planId }}" class="btn-small danger">
+                Archive Plan
+            </a>
+
+            <a href="/parent/restore/{{ routine.planId }}" class="btn-small success">
+                Restore Plan
+            </a>
+        </div>
+
+    </div>
+    {% endif %}
+
+    <!-- ================= NAVIGATION ================= -->
+    <div class="form-actions">
+        <a href="/parent/dashboard" class="secondary-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

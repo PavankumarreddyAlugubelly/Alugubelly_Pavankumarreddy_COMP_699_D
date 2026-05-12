@@ -1,0 +1,127 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="report-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <h2>Weekly Routine Report</h2>
+        <p>
+            This report summarizes routine activity over the past week. 
+            It highlights consistency patterns and helps identify any 
+            unusual behavioral trends.
+        </p>
+    </div>
+
+    {% if report %}
+
+    <!-- ================= WEEKLY SUMMARY ================= -->
+    <div class="report-card">
+
+        <h3>Weekly Summary Overview</h3>
+
+        <div class="report-grid">
+
+            <div class="report-item">
+                <span class="material-symbols-outlined">menu_book</span>
+                <p><strong>Total Study:</strong><br>
+                    {{ report.content.split('Study:')[1].split('Sleep')[0].strip() if 'Study:' in report.content else 'N/A' }}
+                </p>
+            </div>
+
+            <div class="report-item">
+                <span class="material-symbols-outlined">bedtime</span>
+                <p><strong>Total Sleep:</strong><br>
+                    {{ report.content.split('Sleep:')[1].split('Screen')[0].strip() if 'Sleep:' in report.content else 'N/A' }}
+                </p>
+            </div>
+
+            <div class="report-item">
+                <span class="material-symbols-outlined">devices</span>
+                <p><strong>Total Screen:</strong><br>
+                    {{ report.content.split('Screen:')[1].split('Spending')[0].strip() if 'Screen:' in report.content else 'N/A' }}
+                </p>
+            </div>
+
+            <div class="report-item">
+                <span class="material-symbols-outlined">payments</span>
+                <p><strong>Total Spending:</strong><br>
+                    {{ report.content.split('Spending:')[1].strip() if 'Spending:' in report.content else 'N/A' }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= ANALYSIS ================= -->
+    <div class="analysis-card">
+
+        <h3>Weekly Analysis Result</h3>
+
+        <div class="analysis-result">
+
+            <div class="consistency-level">
+                <span class="material-symbols-outlined">insights</span>
+                <h4>Consistency Level</h4>
+                <p class="level-text">{{ report.consistencyLevel }}</p>
+            </div>
+
+            <div class="explanation-box">
+                <span class="material-symbols-outlined">description</span>
+                <h4>Explanation</h4>
+                <p>{{ report.explanation }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= DOWNLOAD (FINAL FIX) ================= -->
+    <div class="download-section">
+        <h3>Export Report</h3>
+        <p>You can download this weekly summary as a PDF file for offline review.</p>
+
+        <!-- ✅ BEST PRACTICE: use url_for -->
+        <a href="{{ url_for('report.download_weekly', childId=childId) }}" class="primary-btn">
+            <span class="material-symbols-outlined">download</span>
+            Download PDF
+        </a>
+    </div>
+
+    {% else %}
+
+    <!-- ================= NO DATA ================= -->
+    <div class="no-data">
+        <p>No sufficient data available to generate a weekly report.</p>
+    </div>
+
+    {% endif %}
+
+    <!-- ================= FILTER ================= -->
+    <div class="filter-section">
+        <h3>Filter Reports by Date</h3>
+
+        <form method="POST" action="{{ url_for('report.filter_reports') }}">
+            <input type="date" name="start" required>
+            <input type="date" name="end" required>
+
+            <button type="submit" class="secondary-btn">
+                <span class="material-symbols-outlined">filter_alt</span>
+                Apply Filter
+            </button>
+        </form>
+    </div>
+
+    <!-- ================= NAVIGATION ================= -->
+    <div class="form-actions">
+        <a href="{{ url_for('parent.dashboard') }}" class="secondary-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- ================= WELCOME ================= -->
+    <div class="dashboard-header">
+        <h2>Welcome, {{ parent.email }}</h2>
+        <p>
+            Manage your child profiles, track daily routines, and monitor 
+            behavior patterns through structured insights and reports.
+        </p>
+    </div>
+
+    <!-- ================= ACTION BUTTONS ================= -->
+    <div class="dashboard-actions">
+
+        <div class="action-card">
+            <span class="material-symbols-outlined">person_add</span>
+            <h3>Add Child Profile</h3>
+            <p>Create a new child profile to start tracking routines.</p>
+
+            <form action="/parent/add_child" method="POST">
+                <input type="text" name="label" placeholder="Child Name" required>
+                <input type="text" name="age" placeholder="Age Range (e.g. 10-12)" required>
+                <button type="submit">Add Child</button>
+            </form>
+        </div>
+
+        <div class="action-card">
+            <span class="material-symbols-outlined">monitoring</span>
+            <h3>View Alerts</h3>
+            <p>Check if any unusual behavior patterns are detected.</p>
+            <a href="/report/alerts" class="action-btn">Open Alerts</a>
+        </div>
+
+        <div class="action-card">
+            <span class="material-symbols-outlined">analytics</span>
+            <h3>Reports</h3>
+            <p>View daily and weekly summaries of routine activities.</p>
+            <p>Select a child below to open reports.</p>
+        </div>
+
+    </div>
+
+    <!-- ================= CHILD LIST ================= -->
+    <div class="child-section">
+
+        <h3>Your Child Profiles</h3>
+
+        {% if children %}
+            <div class="child-grid">
+
+                {% for child in children %}
+                <div class="child-card">
+
+                    <h4>{{ child.label }}</h4>
+                    <p><strong>Age Range:</strong> {{ child.ageRange }}</p>
+
+                    <!-- ACTION BUTTONS -->
+                    <div class="child-actions">
+
+                        <a href="/activity/add/{{ child.childId }}" class="btn-small">
+                            <span class="material-symbols-outlined">edit</span>
+                            Add Activity
+                        </a>
+
+                        <a href="/report/daily/{{ child.childId }}" class="btn-small">
+                            <span class="material-symbols-outlined">today</span>
+                            Daily
+                        </a>
+
+                        <a href="/report/weekly/{{ child.childId }}" class="btn-small">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            Weekly
+                        </a>
+
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+            <p class="no-data">No child profiles found. Please add one to begin.</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
